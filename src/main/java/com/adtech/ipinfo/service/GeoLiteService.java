@@ -33,7 +33,7 @@ public class GeoLiteService {
 
             return ipRes;
         }catch (Exception e){
-            //e.printStackTrace();
+            e.printStackTrace();
             System.out.println("Error Occured...................");
             return new IPRes(ip);
         }
