@@ -14,7 +14,9 @@ public class IPUtil {
     public IPRes getIPResString(CityResponse cityResponse){
 
         Location location = new Location(cityResponse.getLocation());
-        Traits traits = new Traits(cityResponse.getTraits());
+        Traits traits=null;
+        if (cityResponse.getTraits()!=null)
+             traits = new Traits(cityResponse.getTraits());
 
         Map<String, String> countryMap = new HashMap<String, String>(){{
             put(cityResponse.getCountry().getIsoCode(), cityResponse.getCountry().getName());
