@@ -12,15 +12,32 @@ public class IPResource {
     @RequestMapping(value = "/ip" , method = RequestMethod.GET)
     public String ipInfo(HttpServletRequest httpServletRequest){
 
-        String addr0 = httpServletRequest.getHeader("X-Real-IP");
-        String addr1 = httpServletRequest.getHeader("X-Forwarded-For");
-        String addr2 = httpServletRequest.getRemoteAddr();
+        String ip0 = httpServletRequest.getHeader("X-Real-IP");
+        String ip1 = httpServletRequest.getHeader("X-Forwarded-For");
+        String ip2 = httpServletRequest.getRemoteAddr();
 
-        String ipInfo = String.format("X-Real-IP : "+addr0
-                +"\nX-Forwarded-For : "+addr1
-                +"\nRemote Addr : "+addr2);
+        String ipDetails ="X-Real-IP : "+ip0 + "\nX-Forwarded-For : "+ip1 + "\nRemote Addr : "+ip2;
 
-        System.out.println(ipInfo);
+
+
+        System.out.println(ipDetails);
+
+        String ipInfo = "";
+
+        if (ip0 != null && !ip0.trim().isEmpty()){
+            ipInfo = "X-Real-IP : "+ip0;
+        }
+        if (ip1 != null && !ip1.trim().isEmpty()){
+            ipInfo = (ipInfo.trim() + "\nX-Forwarded-For : "+ip1).trim();
+        }
+        if (ip2 != null && !ip2.trim().isEmpty()){
+            ipInfo = (ipInfo.trim() + "\nRemote Addr : "+ip2).trim();
+        }
+
+        if (ipInfo.trim().isEmpty()){
+            ipInfo = "Not Found";
+        }
+
         return ipInfo;
     }
 }
