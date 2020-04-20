@@ -8,17 +8,17 @@ public class Traits {
     private String connectionType;
     private String domain;
     private String ipAddress;
-    private boolean isAnonymousProxy;
-    private boolean isSatelliteProvider;
+    private Boolean isAnonymousProxy;
+    private Boolean isSatelliteProvider;
     private String isp;
     private String organization;
     private String userType;
-    private boolean isLegitimateProxy;
+    private Boolean isLegitimateProxy;
 
     public Traits(com.maxmind.geoip2.record.Traits traits) {
         this.autonomousSystemNumber = traits.getAutonomousSystemNumber();
         this.autonomousSystemOrganization = traits.getAutonomousSystemOrganization();
-        this.connectionType = traits.getConnectionType().toString();
+        this.connectionType = traits.getConnectionType()==null ? "Unknown" : traits.getConnectionType().toString();
         this.domain = traits.getDomain();
         this.ipAddress = traits.getIpAddress();
         this.isAnonymousProxy = traits.isAnonymousProxy();
@@ -69,19 +69,19 @@ public class Traits {
         this.ipAddress = ipAddress;
     }
 
-    public boolean isAnonymousProxy() {
+    public Boolean getAnonymousProxy() {
         return isAnonymousProxy;
     }
 
-    public void setAnonymousProxy(boolean anonymousProxy) {
+    public void setAnonymousProxy(Boolean anonymousProxy) {
         isAnonymousProxy = anonymousProxy;
     }
 
-    public boolean isSatelliteProvider() {
+    public Boolean getSatelliteProvider() {
         return isSatelliteProvider;
     }
 
-    public void setSatelliteProvider(boolean satelliteProvider) {
+    public void setSatelliteProvider(Boolean satelliteProvider) {
         isSatelliteProvider = satelliteProvider;
     }
 
@@ -109,11 +109,11 @@ public class Traits {
         this.userType = userType;
     }
 
-    public boolean isLegitimateProxy() {
+    public Boolean getLegitimateProxy() {
         return isLegitimateProxy;
     }
 
-    public void setLegitimateProxy(boolean legitimateProxy) {
+    public void setLegitimateProxy(Boolean legitimateProxy) {
         isLegitimateProxy = legitimateProxy;
     }
 
