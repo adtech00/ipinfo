@@ -40,8 +40,11 @@ public class IpUtils {
 
         //TODO: Delete It
         try {
-            System.out.println(cityResponse.toJson());
-        } catch (IOException e) {
+            System.out.println("COUNTRY:   "+cityResponse.getCountry().getName());
+            System.out.println("M-SUBDIVISION:   "+cityResponse.getMostSpecificSubdivision().getName());
+            System.out.println("L-SUBDIVISION:   "+cityResponse.getLeastSpecificSubdivision().getName());
+            System.out.println("COUNTINENT:   "+cityResponse.getContinent().getName());
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
