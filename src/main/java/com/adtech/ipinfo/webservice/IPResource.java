@@ -82,11 +82,11 @@ public class IPResource {
             if (ipResponse.trim().equals("{}"))ipResponse=ipRes.toString();
 
             //return ipResponse;
-            res.replace("ipAdd", ipRes.getIpAddress()).replace("ipDetails", ipResponse);
+           return res.replace("ipAdd", ipRes.getIpAddress()).replace("ipDetails", ipResponse);
         } catch (JsonProcessingException e) {
             e.printStackTrace();
             //return ipRes.toString();
-            res.replace("ipAdd", ipRes.getIpAddress()).replace("ipDetails", ipRes.toString());
+           return res.replace("ipAdd", ipRes.getIpAddress()).replace("ipDetails", ipRes.toString());
         }
     }
 }
