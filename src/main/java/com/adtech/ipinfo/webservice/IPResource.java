@@ -50,15 +50,43 @@ public class IPResource {
             logger.error("Exception Occured While Saving IP Information into DB");
         }
 
+
+        String res = "<!DOCTYPE html>\n" +
+                "<html>\n" +
+                "    <body>\n" +
+                "        <div class=\"row jumbotron vertical-center-row\">\n" +
+                "            <h1 style=\"font-size:40px;\" align=\"center\">Dashboard</h1>\n" +
+                "            <p class=\"lead\" align=\"center\"><i class=\"fa fa-list\"></i>  Welcome to IP Info\n" +
+                "            <br>\n" +
+                "            <div class=\"row\">\n" +
+                "                <!-- Spacer -->\n" +
+                "                <div class=\"col-md-2 \" style=\"background-color:lavender;\"></div>\n" +
+                "                <div class=\"col-md-4\">\n" +
+                "                  <div class = \"panel panel-default panel-cust\" style=\"width:100%;\">\n" +
+                "                    <div class = \"panel-body panel-updated\">\n" +
+                "                        <h2 align=\"center\"> IP ADDRESS: %s </h2>\n" +
+                "                        <h4 class=\"desc\" align=\"center\">IP Desc: %s</h4>\n" +
+                "                    </div>\n" +
+                "                  </div>\n" +
+                "                </div>\n" +
+                "            </div>\n" +
+                "        </div>\n" +
+                "    </body>\n" +
+                "</html>";
+
+
         try {
             ObjectMapper mapper = new ObjectMapper();
             mapper.configure(SerializationFeature.FAIL_ON_EMPTY_BEANS, false);
             String ipResponse = mapper.writeValueAsString(ipRes);
             if (ipResponse.trim().equals("{}"))ipResponse=ipRes.toString();
-            return ipResponse;
+
+            //return ipResponse;
+            return String.format(res, ipRes.getIpAddress(), ipResponse);
         } catch (JsonProcessingException e) {
             e.printStackTrace();
-            return ipRes.toString();
+            //return ipRes.toString();
+            return String.format(res, ipRes.getIpAddress(), ipRes.toString());
         }
     }
 }
