@@ -64,8 +64,8 @@ public class IPResource {
                 "                <div class=\"col-md-4\">\n" +
                 "                  <div class = \"panel panel-default panel-cust\" style=\"width:100%;\">\n" +
                 "                    <div class = \"panel-body panel-updated\">\n" +
-                "                        <h2 align=\"center\"> IP ADDRESS: %s </h2>\n" +
-                "                        <h4 class=\"desc\" align=\"center\">IP Desc: %s</h4>\n" +
+                "                        <h2 align=\"center\"> IP ADDRESS: ipAdd </h2>\n" +
+                "                        <h4 class=\"desc\" align=\"center\">IP Desc: ipDetails </h4>\n" +
                 "                    </div>\n" +
                 "                  </div>\n" +
                 "                </div>\n" +
@@ -82,11 +82,11 @@ public class IPResource {
             if (ipResponse.trim().equals("{}"))ipResponse=ipRes.toString();
 
             //return ipResponse;
-            return String.format(res, ipRes.getIpAddress(), ipResponse);
+            res.replace("ipAdd", ipRes.getIpAddress()).replace("ipDetails", ipResponse);
         } catch (JsonProcessingException e) {
             e.printStackTrace();
             //return ipRes.toString();
-            return String.format(res, ipRes.getIpAddress(), ipRes.toString());
+            res.replace("ipAdd", ipRes.getIpAddress()).replace("ipDetails", ipRes.toString());
         }
     }
 }
