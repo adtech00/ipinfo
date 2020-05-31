@@ -38,16 +38,6 @@ public class IpUtils {
             put(cityResponse.getSubdivisions().get(0).getIsoCode(), cityResponse.getSubdivisions().get(0).getName());
         }};
 
-        //TODO: Delete It
-        try {
-            System.out.println("COUNTRY:   "+cityResponse.getCountry().getName());
-            System.out.println("M-SUBDIVISION:   "+cityResponse.getMostSpecificSubdivision().getName());
-            System.out.println("L-SUBDIVISION:   "+cityResponse.getLeastSpecificSubdivision().getName());
-            System.out.println("COUNTINENT:   "+cityResponse.getContinent().getName());
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
         return new IPRes(cityResponse.getTraits().getIpAddress(), location, cityResponse.getCity().getName(), cityResponse.getPostal().getCode(), countryMap, continentMap, subdivisionMap, traits);
     }
 
