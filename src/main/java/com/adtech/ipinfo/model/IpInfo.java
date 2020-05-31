@@ -4,10 +4,13 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Date;
 
 /**
  * @author Abhit
@@ -51,6 +54,17 @@ public class IpInfo implements Serializable {
 
     @Column
     private String continent;
+
+    @Column
+    @CreatedDate
+    @ApiModelProperty(hidden = true)
+    private Date createdDate;
+
+    @Column
+    @LastModifiedDate
+    @ApiModelProperty(hidden = true)
+    private Date lastModifiedDate;
+
 
     public Long getID() {
         return ID;
@@ -132,6 +146,21 @@ public class IpInfo implements Serializable {
         this.continent = continent;
     }
 
+    public Date getCreatedDate() {
+        return createdDate;
+    }
+
+    public void setCreatedDate(Date createdDate) {
+        this.createdDate = createdDate;
+    }
+
+    public Date getLastModifiedDate() {
+        return lastModifiedDate;
+    }
+
+    public void setLastModifiedDate(Date lastModifiedDate) {
+        this.lastModifiedDate = lastModifiedDate;
+    }
 
     @Override
     public String toString() {
@@ -146,6 +175,8 @@ public class IpInfo implements Serializable {
                 ", subdivision='" + subdivision + '\'' +
                 ", country='" + country + '\'' +
                 ", continent='" + continent + '\'' +
+                ", createdDate=" + createdDate +
+                ", lastModifiedDate=" + lastModifiedDate +
                 '}';
     }
 }
