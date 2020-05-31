@@ -1,5 +1,6 @@
 package com.adtech.ipinfo.webservice;
 
+import com.adtech.ipinfo.config.IPInfoConstants;
 import com.adtech.ipinfo.model.IpInfo;
 import com.adtech.ipinfo.model.response.IPRes;
 import com.adtech.ipinfo.service.GeoLiteService;
@@ -24,6 +25,9 @@ public class IPResource {
 
     @Autowired
     private IpUtils ipUtils;
+
+    @Autowired
+    private IPInfoConstants ipInfoConstants;
 
     protected final Logger logger = LoggerFactory.getLogger(getClass());
 
@@ -50,31 +54,6 @@ public class IPResource {
             logger.error("Exception Occured While Saving IP Information into DB");
         }
 
-
-        String res = "<!DOCTYPE html>\n" +
-                "<html>\n" +
-                "    <body>\n" +
-                "        <div class=\"row jumbotron vertical-center-row\">\n" +
-                "            <h1 style=\"font-size:40px;\" align=\"center\">Dashboard</h1>\n" +
-                "            <p class=\"lead\" align=\"center\"><i class=\"fa fa-list\"></i>  Welcome to IP Info\n" +
-                "            <br>\n" +
-                "            <div class=\"row\">\n" +
-                "                <!-- Spacer -->\n" +
-                "                <div class=\"col-md-2 \" style=\"background-color:lavender;\"></div>\n" +
-                "                <div class=\"col-md-4\">\n" +
-                "                  <div class = \"panel panel-default panel-cust\" style=\"width:100%;\">\n" +
-                "                    <div class = \"panel-body panel-updated\">\n" +
-                "                        <h2 align=\"center\"> IP ADDRESS: ipAdd </h2>\n" +
-                "                        <h4 class=\"desc\" align=\"center\">IP Desc: ipDetails </h4>\n" +
-                "                    </div>\n" +
-                "                  </div>\n" +
-                "                </div>\n" +
-                "            </div>\n" +
-                "        </div>\n" +
-                "    </body>\n" +
-                "</html>";
-
-
         try {
             ObjectMapper mapper = new ObjectMapper();
             mapper.configure(SerializationFeature.FAIL_ON_EMPTY_BEANS, false);
@@ -82,11 +61,11 @@ public class IPResource {
             if (ipResponse.trim().equals("{}"))ipResponse=ipRes.toString();
 
             //return ipResponse;
-           return res.replace("ipAdd", ipRes.getIpAddress()).replace("ipDetails", ipResponse);
+           return ipInfoConstants.RESPONSE_PAGE.replace("ipAddress", ipRes.getIpAddress()).replace("ipDetails", ipResponse);
         } catch (JsonProcessingException e) {
             e.printStackTrace();
             //return ipRes.toString();
-           return res.replace("ipAdd", ipRes.getIpAddress()).replace("ipDetails", ipRes.toString());
+           return ipInfoConstants.RESPONSE_PAGE.replace("ipAddress", ipRes.getIpAddress()).replace("ipDetails", ipRes.toString());
         }
     }
 }
