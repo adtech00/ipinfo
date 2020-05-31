@@ -11,6 +11,7 @@ import org.springframework.stereotype.Component;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -85,6 +86,8 @@ public class IpUtils {
         ipInfo.setSubdivision(ipRes.getSubdivision().entrySet().iterator().next().getValue());
         ipInfo.setCountry(ipRes.getCountry().entrySet().iterator().next().getValue());
         ipInfo.setContinent(ipRes.getContinent().entrySet().iterator().next().getValue());
+        ipInfo.setCreatedDate(new Date());
+        ipInfo.setLastModifiedDate(new Date());
 
         return ipInfoRepository.save(ipInfo);
     }
