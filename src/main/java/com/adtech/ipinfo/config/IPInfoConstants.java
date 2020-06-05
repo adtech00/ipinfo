@@ -2,10 +2,14 @@ package com.adtech.ipinfo.config;
 
 import org.springframework.stereotype.Component;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+
 @Component
 public class IPInfoConstants {
     public static final String geoLiteDBLocation = "/adtech/resources/ipinfo/geolocation/GeoLite2-City.mmdb";
-    public static final String RESPONSE_PAGE="<!DOCTYPE html>\n" +
+    public static final String RESPONSE_PAGE1="<!DOCTYPE html>\n" +
             "<html>\n" +
             "    <body style=\"background-image: url(https://images.pexels.com/photos/1526/dark-blur-blurred-gradient.jpg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940);\">\n" +
             "        <div class=\"row jumbotron vertical-center-row\">\n" +
@@ -53,4 +57,14 @@ public class IPInfoConstants {
             "        </footer>\n" +
             "    </body>\n" +
             "</html>";
+
+    public static String RESPONSE_PAGE;
+    static {
+        try {
+            RESPONSE_PAGE = new String(Files.readAllBytes(Paths.get("src/main/resources/templates/ipres/ipinfo.html")));
+        } catch (IOException e) {
+            e.printStackTrace();
+            RESPONSE_PAGE = RESPONSE_PAGE1;
+        }
+    }
 }
